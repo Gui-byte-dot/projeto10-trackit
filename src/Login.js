@@ -10,7 +10,7 @@ export default function Login(){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    function login() {
+    function logar() {
 
         const body = {
             email,
@@ -30,16 +30,18 @@ export default function Login(){
         <Container>
             <Input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <Input type="text" placeholder="senha" value={senha} onChange={(e) => setSenha(e.target.value)}/>
-            <Button onClick={login}>Entrar</Button>
+            <Button onClick={logar}>Entrar</Button>
+            <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
         </Container>
 
 
-    )
+    );
 }
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    
 
 `
 const Input = styled.input`
@@ -55,5 +57,9 @@ const Button = styled.button`
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;
+
+`
+const StyledLink = styled.div`
+    color: #52B6FF;
 
 `

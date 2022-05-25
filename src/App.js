@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Cadastro from './Cadastro';
 import Login from './Login';
+
 
 
 export default function App(){
@@ -10,7 +12,8 @@ export default function App(){
 
             <Routes>
                 <Route path="/" element={<Login />} />
-                
+                <Route path="/cadastro" element={<Cadastro />} />
+
             </Routes>
         
         
