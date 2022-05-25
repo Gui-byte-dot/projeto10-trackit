@@ -14,7 +14,7 @@ export default function Cadastro(){
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
 
-    const navigate = useNavigate();
+    const navigate = useNavigate('');
 
     function cadastrar() {
         const body = {
@@ -29,8 +29,8 @@ export default function Cadastro(){
         
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',body)
         promise.then(res =>{
-            console.log(res.data)
-            navigate.push("/");
+            console.log(res.data);
+            navigate("/");
         })
         .catch(err => {
             console.log(err)

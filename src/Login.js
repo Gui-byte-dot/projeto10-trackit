@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 
 
@@ -10,7 +10,7 @@ export default function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate('');
     function logar() {
 
         const body = {
@@ -20,7 +20,8 @@ export default function Login(){
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
         promise.then(res =>{
-            console.log(res.data)
+            console.log(res.data);
+            navigate("/habitos");
         })
         .catch(err => {
             console.log(err)
