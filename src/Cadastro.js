@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { useState } from "react";
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 
 
@@ -7,29 +10,42 @@ import { useState } from "react";
 
 export default function Cadastro(){
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [nome, setNome] = useState('');
-    const [foto, setFoto] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
+
+    const navigate = useNavigate();
 
     function cadastrar() {
         const body = {
-            email: email,
-            senha: senha,
-            nome: nome,
-            foto: foto,
+            name,
+            image,
+            email,
+            password,
+
 
 
         }
-        console.log(body);
+        
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',body)
+        promise.then(res =>{
+            console.log(res.data)
+            navigate.push("/");
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     }
 
     return (
         <Inputs>
             <InputCadastroEmail type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <InputCadastroSenha type="password" placeholder="senha" value={senha} onChange={(e) => setSenha(e.target.value)}/>
-            <InputCadastroNome type="text" placeholder="nome" value={nome} onChange={(e) => setNome(e.target.value)}/>
-            <InputCadastroFoto type="text" placeholder="foto" value={foto} onChange={(e) => setFoto(e.target.value)} />
+            <InputCadastroSenha type="password" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <InputCadastroNome type="text" placeholder="nome" value={name} onChange={(e) => setName(e.target.value)}/>
+            <InputCadastroFoto type="text" placeholder="foto" value={image} onChange={(e) => setImage(e.target.value)} />
             <Button onClick={cadastrar}>Cadastrar</Button>
+            <Link to="/">Já possui uma conta? Faça login</Link>
         </Inputs>
 
 

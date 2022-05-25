@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 
 
@@ -8,13 +9,13 @@ export default function Login(){
 
 
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
     function logar() {
 
         const body = {
             email,
-            senha,
+            password,
         }
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
@@ -29,9 +30,9 @@ export default function Login(){
     return (
         <Container>
             <Input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input type="text" placeholder="senha" value={senha} onChange={(e) => setSenha(e.target.value)}/>
+            <Input type="text" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <Button onClick={logar}>Entrar</Button>
-            <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+            <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
         </Container>
 
 
@@ -57,9 +58,5 @@ const Button = styled.button`
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;
-
-`
-const StyledLink = styled.div`
-    color: #52B6FF;
 
 `
