@@ -7,14 +7,14 @@ import Habitos from './Habitos';
 
 
 export default function App(){
-    
+    const [token, setToken] = React.useState('');
     return (
         <BrowserRouter>
 
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Login setToken={setToken}/>} />
                 <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/habitos" element={<Habitos />}></Route>
+                <Route path="/habitos" element={<Habitos token={token} />}></Route>
 
             </Routes>
         

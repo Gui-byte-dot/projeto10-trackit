@@ -17,16 +17,19 @@ export default function Login(){
             email,
             password,
         }
+     
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
         promise.then(res =>{
             console.log(res.data);
+            console.log(res.data.token)
             navigate("/habitos");
         })
         .catch(err => {
             console.log(err)
         })
     }
+    
 
     return (
         <Container>
