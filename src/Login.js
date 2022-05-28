@@ -11,18 +11,20 @@ export default function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate('');
+    
+    
     function logar() {
 
         const body = {
             email,
             password,
         }
-     
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
         promise.then(res =>{
             console.log(res.data);
-            console.log(res.data.token)
+            console.log(res.data.token);
+            localStorage.setItem("ola", res.data.token)
             navigate("/habitos");
         })
         .catch(err => {
