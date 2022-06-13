@@ -1,109 +1,77 @@
 
 
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import Habitos from "./Habitos";
 
 
 export default function ListarHabito(){
-    const [name, setName] = useState('');
-    const [days, setDays] = useState('');
-    const selecionados = [];
+    
     const [data,setData] = useState('');
 
-
-    const [id, setId] = useState('');
+    let number = [{'days':1}]
     const ok = localStorage.getItem("ola");
-    const lol = localStorage.getItem("sim")
+    const lol = localStorage.getItem("sim");
+    const [habitos, setHabitos] = useState([]);
+    const infos = [1,2,3,4,5,6,7];
 
 
-
-    function pegarhabito(){
-        console.log(ok);
-
-          const body = {
-              name,
-              days:selecionados,
-          }
-          
-          const configuracao = {
-                headers: {
-                    Authorization: `Bearer ${lol}`
-                }
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${ok}`
             }
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            useEffect(() => {
-            const promessa = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', body, configuracao)
-            promessa.then((objeto) => {
-                setName(objeto.data.name);
-                console.log(objeto.data);
-                console.log(objeto.data[0].name);
-                console.log(objeto.data[167]);
+        }
+        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config);
+        promise.then((object) => {
+            setHabitos(object.data);
+            console.log(object.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
 
 
-                
-            })
-        }, []);
-          
-            
-        
-    
-    }
+    }, []);
 
+    // arr.push.apply(arr, ['c', 'd']); // equivalent to Array.prototype.push.apply(arr, [...])
 
     return (
-      <List>
+        <div className="habitos">
+               {habitos.map((t) => {
+               return (
+                <>  
+                    <div className="listados">
+                        <div>{t.name}</div>
+                        <div className="days" key={t.id}> 
+                              <p>{t.days}<span>{infos}</span></p>
+                        </div>
 
-        
-        <Button onClick={pegarhabito}>ola</Button> 
-        <div className="criacao">
-            <h3>{days}</h3> 
+                    </div>
+                </>
+// var novaArr = arr.filter((este, i) => arr.indexOf(este) === i);
+
+               )})}
         </div>
-             
-       <div className="criacao">
-           <ul>
-                <h3 key={id}>{name}</h3>
-           </ul>
-       
-        </div>
-
-       
-
-
-      </List>
-
     )
-
-
 }
-// function pegarhabito(a){
-//     const corpo = {
-//         name,
-//         days: selecionados,
-//     };
-//     const configuracao = {
-//         headers: {
-//             Authorization: `Bearer ${enviar}`
-//         }
-//     }
-//     const promessa = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', corpo, configuracao)
-//     promessa.then((objeto) => {
-//         setId(objeto.data.token);
-//         setName(objeto.data.name);
-//         setDays(objeto.data.days);
-//         console.log(a)
-//     })
-// }
-const List = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-const Button = styled.button`
-    display: flex;
-    height: 50px;
-    width: 50px;
-`
-const Result = styled.div`
-    display: flex;
-`
+
+
+
+// {t.days.map((s) => {
+//     return(
+//         <div className="days1">{s}</div>
+//     )
+// })}
+
+
+
+
+// .map((s) => {
+//     return (
+//         <div className="destaque" style={{color:'#FFFFFF',background: '#CFCFCF'}}>
+//             {s}
+//         </div>
+//     )
+// })}
